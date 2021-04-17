@@ -7,6 +7,7 @@ import {
     sleep,
     targetIsIframe,
 } from "./utils/helpers";
+import { defaultTags } from "./utils/constants";
 
 /**
  * Runs accessibility test in a web page or iframe
@@ -27,6 +28,10 @@ export default async function run(
     console.log({ window, query, isIframe });
     configureWindow(window);
     // await sleep(100);
-    const axeResults = await axe.run(query, { iframes: isIframe, ...options });
+    const axeResults = await axe.run(query, {
+        iframes: isIframe,
+        runOnly: defaultTags,
+        ...options,
+    });
     return axeResults;
 }

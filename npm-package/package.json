@@ -1,6 +1,6 @@
 {
   "name": "axess",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Bringing web accessibility education to your favorite online IDE",
   "main": "lib/index.js",
   "types": "lib",
@@ -22,7 +22,9 @@
   },
   "homepage": "https://github.com/omerdemirkan/axess#readme",
   "devDependencies": {
-    "typescript": "^4.2.4"
+    "typescript": "^4.2.4",
+    "webpack": "^5.33.2",
+    "webpack-cli": "^4.6.0"
   },
   "dependencies": {
     "axe-core": "^4.1.4"
