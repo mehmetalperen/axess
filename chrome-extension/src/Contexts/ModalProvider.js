@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import useWindowPosition from '../Hooks/useWindowPosition';
-
+import React, { useEffect, useState } from "react";
+import useWindowPosition from "../Hooks/useWindowPosition";
 export const ModalContext = React.createContext({});
 
 const ModalProvider = ({ children }) => {
@@ -13,9 +12,9 @@ const ModalProvider = ({ children }) => {
 
   useEffect(() => {
     // Set up event listeners from Content script
-    window.addEventListener("message", function(event) {
+    window.addEventListener("message", function (event) {
       if (event.source !== window) return;
-      if (event.data.type && (event.data.type === "EXTENSION_ID_RESULT")) {
+      if (event.data.type && event.data.type === "EXTENSION_ID_RESULT") {
         setExtensionId(event.data.extensionId);
       }
     });
