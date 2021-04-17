@@ -13,8 +13,8 @@ export function extractDocumentFromTarget(target: Target): Document {
         typeof target === "string"
             ? (document.querySelector(target) as HTMLIFrameElement)
             : target;
-    let doc = iframeEl.contentWindow || iframeEl.contentDocument;
-    return doc as Document;
+    let doc = (iframeEl.contentWindow || iframeEl.contentDocument) as Document;
+    return doc;
 }
 
 export function targetIsIframe(target: Target): boolean {

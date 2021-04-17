@@ -1,5 +1,5 @@
 import { RunOptions, Target } from "./utils/types";
-import { run as runAxe, AxeResults } from "axe-core";
+import axe from "axe-core";
 import {
     extractDocumentFromTarget,
     extractQueryFromTarget,
@@ -18,10 +18,10 @@ import {
 export default async function run(
     target: Target,
     options: RunOptions = {}
-): Promise<AxeResults> {
+): Promise<axe.AxeResults> {
     const query = extractQueryFromTarget(target);
     const doc = extractDocumentFromTarget(target);
     const isIframe = targetIsIframe(target);
-    const axeResults = await runAxe(query, { iframes: isIframe });
+    const axeResults = await axe.run(query, { iframes: isIframe });
     return axeResults;
 }
