@@ -1,6 +1,10 @@
-import { Target } from "./utils/types";
-import { run as runAxe } from "axe-core";
-import { extractDocumentFromTarget, targetIsIframe } from "./utils/helpers";
+import { RunOptions, Target } from "./utils/types";
+import { run as runAxe, AxeResults } from "axe-core";
+import {
+    extractDocumentFromTarget,
+    extractQueryFromTarget,
+    targetIsIframe,
+} from "./utils/helpers";
 
 /**
  * Runs accessibility test in a document
@@ -11,7 +15,13 @@ import { extractDocumentFromTarget, targetIsIframe } from "./utils/helpers";
  *
  * @beta
  */
-export default function run(target?: Target) {
-    const doc = target ? extractDocumentFromTarget(target) : document;
-    const isIframe = target ? targetIsIframe(target) : false;
+export default async function run(
+    target: Target,
+    options: RunOptions = {}
+): Promise<AxeResults> {
+    const query = extractQueryFromTarget(target);
+    const doc = extractDocumentFromTarget(target);
+    const isIframe = targetIsIframe(target);
+    const axeResults = await runAxe(query, { iframes: isIframe });
+    return axeResults;
 }

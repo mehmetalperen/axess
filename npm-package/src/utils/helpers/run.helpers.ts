@@ -1,5 +1,11 @@
 import { Target } from "../types";
 
+export function extractQueryFromTarget(target: Target): string {
+    if (typeof target === "string") return target;
+    // for later: test for document
+    return "iframe";
+}
+
 export function extractDocumentFromTarget(target: Target): Document {
     if (target instanceof Document) return target;
 
@@ -17,6 +23,6 @@ export function targetIsIframe(target: Target): boolean {
         const el = document.querySelector(target);
         return el?.tagName === "iframe";
     }
-    // for later: test document
+    // for later: test for document
     return true;
 }
