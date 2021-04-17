@@ -3,7 +3,7 @@ export const axeCoreScriptTag = `<script src="https://cdnjs.cloudflare.com/ajax/
 export const tooltipScriptTag = `
 <script>
 
-function __renderModal(violation: any) {
+function __renderModal(violation) {
     const modal = document.createElement("div");
     modal.id = "__web-accessibility-modal__";
     modal.style.position = "absolute";
@@ -30,7 +30,7 @@ function __renderModal(violation: any) {
     document.querySelector("body")?.appendChild(modal);
 }
 
-function __renderTooltip(query: any, violation: any) {
+function __renderTooltip(query, violation) {
     const element = document.querySelector(query);
     const rect = element.getBoundingClientRect();
 

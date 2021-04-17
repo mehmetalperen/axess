@@ -33,5 +33,14 @@ export default async function run(
         runOnly: defaultTags,
         ...options,
     });
+
+    // @ts-ignore
+    const renderTooltip = window.__renderTooltip;
+
+    if (axeResults.violations.length) {
+        for (let violation of axeResults.violations)
+            for (let node of violation.nodes)
+                renderTooltip(node.target[0], violation);
+    }
     return axeResults;
 }
