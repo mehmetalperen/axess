@@ -1,6 +1,7 @@
 import { axeCoreScriptTag } from "../constants";
 
-export function configureDocument(doc: Document) {
+export function configureWindow(window: Window) {
+    const doc = window.document;
     const htmlString = doc.documentElement.innerHTML;
     if (htmlString.includes(axeCoreScriptTag)) return;
 
