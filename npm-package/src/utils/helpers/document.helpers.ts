@@ -1,7 +1,10 @@
-import { axeCoreScriptTag } from "../constants/run.constants";
+import { axeCoreScriptTag } from "../constants";
 
-export function injectAxeCore(doc: Document) {
+export function configureDocument(doc: Document) {
     const htmlString = doc.documentElement.innerHTML;
+
+    if (htmlString.includes(axeCoreScriptTag)) return;
+
     const i = htmlString.indexOf("</body");
     const injectedHtmlString =
         htmlString.slice(0, i) + axeCoreScriptTag + htmlString.slice(i);

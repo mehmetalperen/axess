@@ -1,6 +1,6 @@
 {
   "name": "axess",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Bringing web accessibility education to your favorite online IDE",
   "main": "lib/index.js",
   "types": "lib",

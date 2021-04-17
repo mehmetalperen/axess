@@ -3,14 +3,16 @@ import axe from "axe-core";
 import {
     extractDocumentFromTarget,
     extractQueryFromTarget,
+    configureDocument,
+    sleep,
     targetIsIframe,
 } from "./utils/helpers";
 
 /**
- * Runs accessibility test in a document
+ * Runs accessibility test in a web page or iframe
  *
  *
- * @param target - The document or path to iframe element
+ * @param target - The document or query for iframe element
  * @param options - The second input number
  *
  * @beta
@@ -22,6 +24,9 @@ export default async function run(
     const query = extractQueryFromTarget(target);
     const doc = extractDocumentFromTarget(target);
     const isIframe = targetIsIframe(target);
-    const axeResults = await axe.run(query, { iframes: isIframe });
+    console.log({ doc, query, isIframe });
+    configureDocument(doc);
+    // await sleep(100);
+    const axeResults = await axe.run(query, { iframes: isIframe, ...options });
     return axeResults;
 }
