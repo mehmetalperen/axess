@@ -1,0 +1,22 @@
+{
+  "name": "axess",
+  "version": "0.0.1",
+  "description": "Bringing web accessibility education to your favorite online IDE",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omerdemirkan/axess.git"
+  },
+  "keywords": [
+    "web-accessibility"
+  ],
+  "author": "Omer Demirkan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/omerdemirkan/axess/issues"
+  },
+  "homepage": "https://github.com/omerdemirkan/axess#readme"
+}
