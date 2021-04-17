@@ -1,27 +1,32 @@
 import { RunOptions, Target } from "./utils/types";
-import { run as runAxe, AxeResults } from "axe-core";
+import axe from "axe-core";
 import {
-    extractDocumentFromTarget,
+    extractWindowFromTarget,
     extractQueryFromTarget,
+    configureWindow,
+    sleep,
     targetIsIframe,
 } from "./utils/helpers";
 
 /**
- * Runs accessibility test in a document
+ * Runs accessibility test in a web page or iframe
  *
  *
- * @param target - The document or path to iframe element
+ * @param target - The query for iframe element
  * @param options - The second input number
  *
  * @beta
  */
 export default async function run(
-    target: Target,
+    target: Target = "iframe",
     options: RunOptions = {}
-): Promise<AxeResults> {
+): Promise<axe.AxeResults> {
     const query = extractQueryFromTarget(target);
-    const doc = extractDocumentFromTarget(target);
+    const window = extractWindowFromTarget(target);
     const isIframe = targetIsIframe(target);
-    const axeResults = await runAxe(query, { iframes: isIframe });
+    console.log({ window, query, isIframe });
+    configureWindow(window);
+    // await sleep(100);
+    const axeResults = await axe.run(query, { iframes: isIframe, ...options });
     return axeResults;
 }

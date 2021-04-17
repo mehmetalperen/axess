@@ -1,0 +1,1 @@
+export const axeCoreScriptTag = `<script src="https://cdnjs.cloudflare.com/ajax/libs/axe-core/4.0.2/axe.min.js" integrity="sha512-e/si4R98/WF/59ivWxdDaxSiYtMW2RRXkB9aXDmYYsgbFDBrjZdhBckgALwNQ5LhaEAqLKGJf7IqaoipS8IFig==" crossorigin="anonymous"></script>`;

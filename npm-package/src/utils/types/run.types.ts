@@ -1,5 +1,5 @@
-export type Target = string | HTMLIFrameElement | Document;
+import axe from "axe-core";
 
-export interface RunOptions {
-    debounceMs?: number;
-}
+export type Target = string | HTMLIFrameElement;
+
+export interface RunOptions extends axe.RunOptions {}
