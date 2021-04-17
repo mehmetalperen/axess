@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "description": "Bringing web accessibility education to your favorite online IDE",
   "main": "lib/index.js",
+  "types": "lib",
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/omerdemirkan/axess/issues"
   },
-  "homepage": "https://github.com/omerdemirkan/axess#readme"
+  "homepage": "https://github.com/omerdemirkan/axess#readme",
+  "devDependencies": {
+    "typescript": "^4.2.4"
+  }
 }
