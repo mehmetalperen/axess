@@ -2,7 +2,6 @@ import { axeCoreScriptTag } from "../constants";
 
 export function configureDocument(doc: Document) {
     const htmlString = doc.documentElement.innerHTML;
-
     if (htmlString.includes(axeCoreScriptTag)) return;
 
     const i = htmlString.indexOf("</body");
