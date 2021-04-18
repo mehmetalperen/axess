@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Editor from "./Editor";
-// import { register } from "axess";
+import { register } from "axess";
+import useDebounce from "../hooks/useDebounce";
 
 function App() {
   const [html, setHtml] = useState("");
@@ -8,12 +9,13 @@ function App() {
   const [css, setCss] = useState("");
 
   const [src, setSrc] = useState("");
+  const debouncedSource = useDebounce(src, 500);
   const iframeRef = useRef();
 
-  // useEffect(function () {
-  //   console.log("Calling register");
-  //   register(`#output`);
-  // }, []);
+  useEffect(function () {
+    console.log("Calling register");
+    register(`#output`);
+  }, []);
 
   useEffect(function () {
     const storedSrc = localStorage.getItem("src");
@@ -55,7 +57,7 @@ function App() {
 
       <div className="pane">
         <iframe
-          srcDoc={src}
+          srcDoc={debouncedSource}
           ref={iframeRef}
           title="output"
           id="output"
