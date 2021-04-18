@@ -7,6 +7,7 @@ import {
     extractSnapshotFromAuditHistory,
 } from "./utils/helpers";
 import { defaultTags } from "./utils/constants";
+import { createSnapshot } from "./utils/services";
 
 let isRunning = false;
 let isQueued = false;
@@ -69,7 +70,7 @@ export default async function run(
     auditResultHistory.push(auditResult);
 
     const snapshot = extractSnapshotFromAuditHistory(auditResultHistory);
-    alert(JSON.stringify(snapshot, null, 2));
+    if (snapshot) createSnapshot(snapshot);
 
     return auditResult;
 }
