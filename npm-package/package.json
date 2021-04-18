@@ -27,6 +27,7 @@
     "webpack-cli": "^4.6.0"
   },
   "dependencies": {
-    "axe-core": "4.0.2"
+    "axe-core": "4.0.2",
+    "firebase": "^8.4.1"
   }
 }
