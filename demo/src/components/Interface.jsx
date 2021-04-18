@@ -9,12 +9,33 @@ function Interface() {
 
   const [src, setSrc] = useState("");
   const debouncedSource = useDebounce(src, 1500);
-  const iframeRef = useRef();
+  const touchedRef = useRef(false);
 
-  useEffect(function () {
-    const storedSrc = localStorage.getItem("src");
-    if (storedSrc) setSrc(storedSrc);
-  }, []);
+  useEffect(
+    function () {
+      if (!touchedRef.current) {
+        touchedRef.current = true;
+        const storedDataString = localStorage.getItem("editor-state");
+        if (!storedDataString) return;
+        try {
+          const { javascript, html, css } = JSON.parse(storedDataString);
+          setJs(javascript);
+          setHtml(html);
+          setCss(css);
+        } catch (e) {}
+      } else {
+        localStorage.setItem(
+          "editor-state",
+          JSON.stringify({
+            javascript,
+            html,
+            css,
+          })
+        );
+      }
+    },
+    [debouncedSource]
+  );
 
   useEffect(
     function () {
@@ -51,8 +72,7 @@ function Interface() {
 
       <div className="pane">
         <iframe
-          srcDoc={debouncedSource}
-          ref={iframeRef}
+          srcDoc={debouncedSource || src}
           title="output"
           id="output"
           // sandbox="allow-scripts"
