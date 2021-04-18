@@ -1,20 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import Editor from "./Editor";
-// import { register } from "../lib";
 import useDebounce from "../hooks/useDebounce";
 
-function App() {
+function Interface() {
   const [html, setHtml] = useState("");
   const [javascript, setJs] = useState("");
   const [css, setCss] = useState("");
 
   const [src, setSrc] = useState("");
-  const debouncedSource = useDebounce(src, 500);
+  const debouncedSource = useDebounce(src, 1500);
   const iframeRef = useRef();
-
-  // useEffect(function () {
-  //   register(`#output`);
-  // }, []);
 
   useEffect(function () {
     const storedSrc = localStorage.getItem("src");
@@ -82,4 +77,4 @@ function App() {
   );
 }
 
-export default App;
+export default Interface;
