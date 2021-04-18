@@ -55,8 +55,8 @@ export default async function run(
 
     for (let violation of axeResults.violations) {
         for (let node of violation.nodes) {
-            console.log(violation);
-            renderTooltip(node.target[0], violation);
+            const query = node.target[1];
+            if (query !== "html") renderTooltip(query, violation);
         }
     }
 

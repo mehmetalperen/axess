@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Editor from "./Editor";
-import { register } from "axess";
+// import { register } from "../lib";
 import useDebounce from "../hooks/useDebounce";
 
 function App() {
@@ -12,10 +12,9 @@ function App() {
   const debouncedSource = useDebounce(src, 500);
   const iframeRef = useRef();
 
-  useEffect(function () {
-    console.log("Calling register");
-    register(`#output`);
-  }, []);
+  // useEffect(function () {
+  //   register(`#output`);
+  // }, []);
 
   useEffect(function () {
     const storedSrc = localStorage.getItem("src");
