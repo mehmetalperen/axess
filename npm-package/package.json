@@ -1,6 +1,6 @@
 {
   "name": "axess",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "description": "Bringing web accessibility education to your favorite online IDE",
   "main": "lib/index.js",
   "types": "lib",
@@ -27,6 +27,6 @@
     "webpack-cli": "^4.6.0"
   },
   "dependencies": {
-    "axe-core": "^4.1.4"
+    "axe-core": "^4.0.2"
   }
 }

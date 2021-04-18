@@ -6,6 +6,12 @@ export function extractQueryFromTarget(target: Target): string {
     return "iframe";
 }
 
+export function extractIframeFromTarget(target: Target): HTMLIFrameElement {
+    if (typeof target === "string")
+        return document.querySelector(target) as HTMLIFrameElement;
+    return target;
+}
+
 export function extractWindowFromTarget(target: Target): Window {
     if (target instanceof Window) return target;
 
@@ -19,9 +25,9 @@ export function extractWindowFromTarget(target: Target): Window {
 
 export function targetIsIframe(target: Target): boolean {
     if (target instanceof HTMLElement) return target.tagName === "iframe";
-    if (typeof target === "string") {
-        const el = document.querySelector(target);
-        return el?.tagName === "iframe";
-    }
+    // if (typeof target === "string") {
+    //     const el = document.querySelector(target);
+    //     return el?.tagName === "iframe";
+    // }
     return true;
 }

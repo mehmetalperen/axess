@@ -1,18 +1,46 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Editor from "./Editor";
+import { register } from "../lib";
 
 function App() {
   const [html, setHtml] = useState("");
   const [javascript, setJs] = useState("");
   const [css, setCss] = useState("");
 
-  const scrCode = `
-  <html>
-    <body>${html}</body>
-    <style> ${css}</style>
-    <script> ${javascript}</script>
-    </html>
-  `;
+  const [src, setSrc] = useState("");
+  const iframeRef = useRef();
+
+  function saveSrc() {
+    localStorage.setItem("src", src);
+  }
+
+  useEffect(function () {
+    console.log("Calling register");
+    register(`#output`);
+  }, []);
+
+  useEffect(function () {
+    const storedSrc = localStorage.getItem("src");
+    if (storedSrc) setSrc(storedSrc);
+    return () => saveSrc();
+  }, []);
+
+  useEffect(
+    function () {
+      setSrc(`
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Document</title>
+      </head>
+      <body>${html}</body>
+      </html>
+      `);
+    },
+    [html, css, javascript]
+  );
 
   return (
     <>
@@ -30,9 +58,11 @@ function App() {
 
       <div className="pane">
         <iframe
-          srcDoc={scrCode}
+          srcDoc={src}
+          ref={iframeRef}
           title="output"
-          sandbox="allow-scripts"
+          id="output"
+          // sandbox="allow-scripts"
           frameBorder="0"
           width="100%"
           height="100%"

@@ -4,6 +4,7 @@ export const tooltipScriptTag = `
 <script>
 
 function __renderModal(violation) {
+    alert("Inside __renderModal")
     const modal = document.createElement("div");
     modal.id = "__web-accessibility-modal__";
     modal.style.position = "absolute";
@@ -31,6 +32,7 @@ function __renderModal(violation) {
 }
 
 function __renderTooltip(query, violation) {
+    alert("Inside __renderTooltip")
     const element = document.querySelector(query);
     const rect = element.getBoundingClientRect();
 
