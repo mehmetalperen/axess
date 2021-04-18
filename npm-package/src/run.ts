@@ -1,14 +1,16 @@
-import { RunOptions, Target } from "./utils/types";
+import { AuditResult, RunOptions, Target } from "./utils/types";
 import axe from "axe-core";
 import {
     extractWindowFromTarget,
     extractQueryFromTarget,
     targetIsIframe,
+    extractSnapshotFromAuditHistory,
 } from "./utils/helpers";
 import { defaultTags } from "./utils/constants";
 
 let isRunning = false;
 let isQueued = false;
+let auditResultHistory: AuditResult[] = [];
 
 /**
  * Runs accessibility test in a web page or iframe
@@ -22,7 +24,7 @@ let isQueued = false;
 export default async function run(
     target: Target = "iframe",
     options: RunOptions = {}
-): Promise<axe.AxeResults> {
+): Promise<AuditResult> {
     console.log("before isRunning check");
     if (isRunning) {
         isQueued = true;
@@ -43,10 +45,12 @@ export default async function run(
         runOnly: defaultTags,
         ...options,
     });
-    console.log({
-        axeResults,
+    console.log("after running axe");
+
+    const auditResult: AuditResult = {
+        ...axeResults,
         src: window.document.documentElement.innerHTML,
-    });
+    };
 
     // @ts-ignore
     const renderTooltip = window.__renderTooltip;
@@ -62,5 +66,10 @@ export default async function run(
 
     isRunning = false;
 
-    return axeResults;
+    auditResultHistory.push(auditResult);
+
+    const snapshot = extractSnapshotFromAuditHistory(auditResultHistory);
+    alert(JSON.stringify(snapshot, null, 2));
+
+    return auditResult;
 }

@@ -1,2 +1,3 @@
 export * from "./run.types";
-export * from "./correction.types";
+export * from "./snapshot.types";
+export * from "./audit.types";
