@@ -20,6 +20,8 @@ export function configureWindow(window: Window) {
         tooltipScriptTag,
     ]);
 
+    if (htmlString === injectedHtmlString) return;
+
     doc.open();
     doc.write(injectedHtmlString);
     doc.close();

@@ -3,8 +3,6 @@ import axe from "axe-core";
 import {
     extractWindowFromTarget,
     extractQueryFromTarget,
-    configureWindow,
-    sleep,
     targetIsIframe,
 } from "./utils/helpers";
 import { defaultTags } from "./utils/constants";
@@ -38,15 +36,17 @@ export default async function run(
     const window = extractWindowFromTarget(target);
     const isIframe = targetIsIframe(target);
     console.log({ window, query, isIframe });
-    configureWindow(window);
-    // await sleep(100);
+
     console.log("before running axe");
     const axeResults = await axe.run(query, {
         iframes: isIframe,
         runOnly: defaultTags,
         ...options,
     });
-    console.log("after running axe");
+    console.log({
+        axeResults,
+        src: window.document.documentElement.innerHTML,
+    });
 
     // @ts-ignore
     const renderTooltip = window.__renderTooltip;

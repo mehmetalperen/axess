@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Editor from "./Editor";
-import { register } from "../lib";
+// import { register } from "axess";
 
 function App() {
   const [html, setHtml] = useState("");
@@ -10,19 +10,14 @@ function App() {
   const [src, setSrc] = useState("");
   const iframeRef = useRef();
 
-  function saveSrc() {
-    localStorage.setItem("src", src);
-  }
-
-  useEffect(function () {
-    console.log("Calling register");
-    register(`#output`);
-  }, []);
+  // useEffect(function () {
+  //   console.log("Calling register");
+  //   register(`#output`);
+  // }, []);
 
   useEffect(function () {
     const storedSrc = localStorage.getItem("src");
     if (storedSrc) setSrc(storedSrc);
-    return () => saveSrc();
   }, []);
 
   useEffect(
@@ -34,8 +29,10 @@ function App() {
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <title>Document</title>
+          <style>${css}</style>
       </head>
       <body>${html}</body>
+      <script>${javascript}</script>
       </html>
       `);
     },

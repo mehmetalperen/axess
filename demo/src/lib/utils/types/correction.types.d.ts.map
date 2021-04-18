@@ -1,1 +1,0 @@
-{"version":3,"file":"correction.types.d.ts","sourceRoot":"","sources":["../../../src/utils/types/correction.types.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,UAAU;IACvB,MAAM,EAAE;QACJ,IAAI,EAAE,MAAM,CAAC;KAChB,CAAC;IACF,KAAK,EAAE;QACH,IAAI,EAAE,MAAM,CAAC;KAChB,CAAC;IACF,SAAS,EAAE,MAAM,CAAC;CACrB"}

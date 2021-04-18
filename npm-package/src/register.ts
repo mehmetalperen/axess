@@ -1,11 +1,11 @@
-import { RunOptions } from "axe-core";
-import { extractIframeFromTarget } from "./utils/helpers";
+import axe, { RunOptions } from "axe-core";
+import run from "./run";
+import {
+    configureWindow,
+    extractIframeFromTarget,
+    extractWindowFromTarget,
+} from "./utils/helpers";
 import { Target } from "./utils/types";
-
-const observer = new MutationObserver(function (...args) {
-    console.log("mutation detected");
-    console.log(...args);
-});
 
 export default function register(
     target: Target = "iframe",
@@ -13,9 +13,16 @@ export default function register(
 ) {
     console.log("inside register()");
     const iframe = extractIframeFromTarget(target);
-    observer.observe(iframe, {
-        characterData: true,
-        subtree: true,
-        childList: true,
-    });
+    const window = extractWindowFromTarget(target);
+
+    const originalOnLoad = iframe.onload;
+
+    iframe.onload = function (...args) {
+        // @ts-ignore
+        originalOnLoad && originalOnLoad(...args);
+
+        console.log("configuring window");
+        configureWindow(window);
+        run(target, options);
+    };
 }
