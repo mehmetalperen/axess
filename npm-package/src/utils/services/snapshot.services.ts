@@ -12,8 +12,6 @@ export async function createSnapshot(snapshot: Snapshot) {
             },
             violation: snapshot.violation,
         });
-        const res = await db.collection("snapshots").get();
-        console.log(res);
     } catch (e) {
         console.error(e);
     }

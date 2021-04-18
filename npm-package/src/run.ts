@@ -26,27 +26,22 @@ export default async function run(
     target: Target = "iframe",
     options: RunOptions = {}
 ): Promise<AuditResult> {
-    console.log("before isRunning check");
     if (isRunning) {
         isQueued = true;
         return null as any;
     }
-    console.log("after isRunning check");
 
     isRunning = true;
 
     const query = extractQueryFromTarget(target);
     const window = extractWindowFromTarget(target);
     const isIframe = targetIsIframe(target);
-    console.log({ window, query, isIframe });
 
-    console.log("before running axe");
     const axeResults = await axe.run(query, {
         iframes: isIframe,
         runOnly: defaultTags,
         ...options,
     });
-    console.log("after running axe");
 
     const auditResult: AuditResult = {
         ...axeResults,
@@ -55,8 +50,6 @@ export default async function run(
 
     // @ts-ignore
     const renderTooltip = window.__renderTooltip;
-
-    console.log("renderTooltip: ", renderTooltip);
 
     for (let violation of axeResults.violations) {
         for (let node of violation.nodes) {
