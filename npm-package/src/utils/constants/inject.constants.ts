@@ -2,8 +2,7 @@ export const axeCoreScriptTag = `<script src="https://cdnjs.cloudflare.com/ajax/
 
 export const tooltipScriptTag = `
 <script>
-
-function __renderModal(violation) {
+function __renderModal(violation, node) {
     const existingModal = document.getElementById(
         "__web-accessibility-modal__"
     );
@@ -39,7 +38,7 @@ function __renderModal(violation) {
     impact.style.color = "white";
     impact.style.float = "right"
     impact.style.fontSize = "14px"
-  impact.style.marginBottom = "5px";
+    impact.style.marginBottom = "5px";
 
     const helpUrl = document.createElement("a");
     helpUrl.href = violation.helpUrl;
@@ -49,6 +48,14 @@ function __renderModal(violation) {
     helpUrl.style.display = "block";
     helpUrl.style.margin = "0 0 15px 0";
     helpUrl.target = "_blank"
+  
+    const codeBlock = document.createElement("pre")
+    codeBlock.style.padding = "20px"
+    codeBlock.style.backgroundColor = "#eeeeee"
+    codeBlock.style.borderRadius = "4px"
+    codeBlock.style.margin = "10px 0"
+    codeBlock.innerText = node.html
+    
 
     const closeButton = document.createElement("button");
     closeButton.style.padding = "10px";
@@ -69,12 +76,13 @@ function __renderModal(violation) {
     modal.appendChild(header);
     modal.appendChild(description);
     modal.appendChild(helpUrl);
+    modal.appendChild(codeBlock);
     modal.appendChild(closeButton);
 
     document.querySelector("body")?.appendChild(modal);
 }
 
-function __renderTooltip(query, violation) {
+function __renderTooltip(query, violation, node) {
     const tooltipId = "__web-accessibility-tooltip__" + query
     const existingModal = document.getElementById(tooltipId);
     if (existingModal) {
@@ -87,7 +95,7 @@ function __renderTooltip(query, violation) {
 
     const tooltip = document.createElement("span");
     tooltip.id = tooltipId;
-    tooltip.onclick = () => __renderModal(violation);
+    tooltip.onclick = () => __renderModal(violation, node);
     const toolTipColor = __getImpactColor(violation.impact);
 
     // STYLING
