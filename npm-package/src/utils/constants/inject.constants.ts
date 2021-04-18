@@ -75,9 +75,8 @@ function __renderModal(violation) {
 }
 
 function __renderTooltip(query, violation) {
-    const existingModal = document.getElementById(
-        "__web-accessibility-tooltip__"
-    );
+    const tooltipId = "__web-accessibility-tooltip__" + query
+    const existingModal = document.getElementById(tooltipId);
     if (existingModal) {
         existingModal.remove();
     }
@@ -87,7 +86,7 @@ function __renderTooltip(query, violation) {
     const rect = element.getBoundingClientRect();
 
     const tooltip = document.createElement("span");
-    tooltip.id = "__web-accessibility-tooltip__";
+    tooltip.id = tooltipId;
     tooltip.onclick = () => __renderModal(violation);
     const toolTipColor = __getImpactColor(violation.impact);
 
