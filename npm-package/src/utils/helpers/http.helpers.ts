@@ -75,6 +75,5 @@ export class HttpClient {
 }
 
 export const firebaseClient = new HttpClient({
-    baseUrl:
-        "https://firestore.googleapis.com/v1/projects/YOUR_PROJECT_ID/databases/(default)/",
+    baseUrl: "https://axess-5b30b.firebaseio.com/",
 });
