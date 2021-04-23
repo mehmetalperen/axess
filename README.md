@@ -1,12 +1,39 @@
+<p align="center">
+<img src="https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/software_photos/001/486/906/datas/gallery.jpg" alt="Axess Logo"/>
+</p>
+
 # Axess
 
-## Inspiration
-With the exponential rise of technological developments in the last century, we as a society have witnessed such incredible improvements in our lifetimes that no generation in human history ever has. The internet, without a doubt, is one of the most important inventions that has been positively impacting our lives by being a fast path to information and connecting the entire globe. Unfortunately, it is still not quite accessible for a significant portion of the population: people with disabilities.
-Websites and digital materials that are not designed with accessibility in mind, often excluding a significant population of potential users from participating in an internet-dependent world. Unfortunately, information exclusion is a barrier people with disabilities experience on a daily basis. 
-For example, 67% of disabled Americans own a desktop or laptop computer, compared with 84% of those in the same age group who don’t have a disability.
+### [Winner of "Best Health or Social Good Hack" at Hacktech 2021](https://devpost.com/software/axess)
 
 ## What it does
 Axess takes advantage of the popularity of tools such as CodePen and JSBin among those learning web development by offering an **NPM Package** that allows for seamless integration of online IDE's into a web accessibility education tool. This low-overhead solution may be an opportunity to introduce millions of aspiring web developers, regardless of background, to web accessibility.
+
+## Get started
+In an online IDE with node module integration set up (with a bundler such as webpack or rollup)
+```bash
+npm i axess
+npm i --save-exact axe-core@4.0.2
+```
+
+Once these packages are installed, import axess's register function and invoke it in the app's entry-point with an optional selector to the iframe element.
+
+The following is an example written in React
+```javascript
+import React, { useEffect } from "react";
+import Interface from "./components/Interface";
+import { register } from "axess";
+
+function App() {
+  useEffect(function () {
+    register("#iframe-id");
+  }, []);
+  return <Interface />;
+}
+
+export default App;
+```
+Ensure that the register function is invoked after the iframe element is painted to the DOM.
 
 ## How we built it
 To demonstrate how Axess would be used, we created an online IDE where the user is able to write and run HTML, CSS, Javascript. We take the user's code and run accessibility tests and then send the test results to our UI where we flag the issues. By clicking on the flag, the user sees an explanation of the issue and a solution to fix the problem. By clicking the "Learn More", the user can dive deeper into the best practices about creating accessible web applications. We also store web accessibility violation corrections in Firebase. After the user makes a correction, we send the initial code sample (the inaccessible code) and the corrected code (the accessible code) to Firebase where we compare the incorrect and correct codes for Machine Learning
